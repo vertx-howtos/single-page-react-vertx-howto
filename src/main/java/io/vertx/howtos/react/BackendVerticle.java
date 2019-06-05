@@ -12,9 +12,7 @@ public class BackendVerticle extends AbstractVerticle {
     // tag::backend[]
     Router router = Router.router(vertx);
 
-    router.get("/greet/:name").handler(rc -> { // <1>
-      rc.response().end(String.format("Hello %s!", rc.pathParam("name"))); // <2>
-    });
+    router.get("/api/message").handler(rc -> rc.response().end("Hello React from Vert.x!")); // <1>
 
     router.get().handler(StaticHandler.create()); // <3>
 
