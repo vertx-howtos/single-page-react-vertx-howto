@@ -10,4 +10,3 @@ build/
 .sass-cache/
 Gemfile.lock
 _site/
-package-lock.json
