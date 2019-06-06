@@ -10,14 +10,18 @@ repositories {
   mavenCentral()
 }
 
+// tag::dependencies[]
 dependencies {
   val vertxVersion = "3.7.0"
   implementation("io.vertx:vertx-web:${vertxVersion}")
 }
+// end::dependencies[]
 
+// tag::application-main[]
 application {
   mainClassName = "io.vertx.howtos.react.BackendVerticle"
 }
+// end::application-main[]
 
 node {
   version = "10.15.3"

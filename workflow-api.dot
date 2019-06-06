@@ -1,0 +1,9 @@
+strict digraph {
+    rankdir=LR;
+    splines="line";
+    browser [label="Browser" shape="ellipse" color="#585858" style="filled" fillcolor="#848484" fontcolor="white"]
+    frontend [label="Frontend Server" shape="polygon" color="#585858" style="rounded,filled" fillcolor="#61dafb" fontcolor="white"]
+    backend [label="Backend" shape="polygon" color="#585858" style="rounded,filled" fillcolor="#782b90" fontcolor="white"]
+    browser -> frontend [label="/api/message"]
+    frontend -> backend [label="/api/message"]
+}

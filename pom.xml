@@ -15,27 +15,19 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-stack-depchain</artifactId>
-        <version>${vertx.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
+  <!-- tag::dependencies[] -->
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
+      <version>${vertx.version}</version>
     </dependency>
   </dependencies>
+  <!-- end::dependencies[] -->
 
   <build>
     <plugins>
+      <!-- tag::exec-plugin[] -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -44,6 +36,7 @@
           <mainClass>io.vertx.howtos.react.BackendVerticle</mainClass>
         </configuration>
       </plugin>
+      <!-- end::exec-plugin[] -->
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>

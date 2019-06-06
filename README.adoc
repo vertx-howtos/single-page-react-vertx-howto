@@ -1,0 +1,80 @@
+= Single Page Application development with React and Vert.x
+:page-permalink: /
+:page-github: vertx-howtos/single-page-react-vertx-howto
+
+ifdef::env-github[]
+image:https://travis-ci.org/vertx-howtos/single-page-react-vertx-howto.svg?branch=master["Build Status", link="https://travis-ci.org/vertx-howtos/single-page-react-vertx-howto"]
+endif::env-github[]
+
+This document will show you how to develop a Single Page Application (SPA) with React and Vert.x.
+
+== What you will build
+
+You will create a React frontend communicating over HTTP with a Vert.x backend:
+
+. the browser sends a request to the backend API
+. the backend replies with a greeting message
+. the frontend displays the message on the web page
+
+== Development workflow
+
+When developing a SPA, it is very convenient to get instant feedback after updating a Javascript, HTML or CSS file.
+With React, this requires you start a development server with `npm`.
+
+So you will configure the project to let frontend developers start the project with `npm` and proxy API requests to the backend.
+
+Here is what happens when the browser requests a frontend resource:
+
+image::workflow.svg[Frontend resource]
+
+And when the browser sends an API request:
+
+image::workflow-api.svg[API request]
+
+== What you need
+
+* A text editor or IDE
+* Java 8 higher
+* Maven or Gradle
+* https://www.npmjs.com/package/npx#install[`npx`], an NPM package runner
+
+== Create a project
+
+The code of this project contains Maven and Gradle build files that are functionally equivalent.
+
+=== Using Maven
+
+Add the `vertx-web` dependency in you Maven POM file:
+
+[source,xml,role="collapsed"]
+.Maven `pom.xml`
+----
+include::pom.xml[tag=dependencies]
+----
+
+Then add the `exec-maven-plugin`:
+
+[source,xml,role="collapsed"]
+.Maven `pom.xml`
+----
+include::pom.xml[tag=exec-plugin]
+----
+
+=== Using Gradle
+
+Assuming you use Gradle with the Kotlin DSL, add the `vertx-web` dependency:
+
+[source,kotlin,role="collapsed"]
+.Gradle `build.gradle.kts`
+----
+include::build.gradle.kts[tag=dependencies]
+----
+
+Then configure the application main class:
+
+
+[source,kotlin,role="collapsed"]
+.Gradle `build.gradle.kts`
+----
+include::build.gradle.kts[tag=application-main]
+----
