@@ -37,6 +37,7 @@
         </configuration>
       </plugin>
       <!-- end::exec-plugin[] -->
+      <!-- tag::maven-frontend-build[] -->
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
@@ -52,7 +53,7 @@
             <id>install-node-and-npm</id>
             <phase>generate-resources</phase>
             <goals>
-              <goal>install-node-and-npm</goal>
+              <goal>install-node-and-npm</goal> <!--1-->
             </goals>
           </execution>
           <execution>
@@ -62,14 +63,14 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>install</arguments>
+              <arguments>install</arguments> <!--2-->
             </configuration>
           </execution>
           <execution>
             <id>npm-run-build</id>
             <phase>generate-resources</phase>
             <goals>
-              <goal>npm</goal>
+              <goal>npm</goal> <!--3-->
             </goals>
             <configuration>
               <arguments>run build</arguments>
@@ -85,7 +86,7 @@
             <id>copy-to-webroot</id>
             <phase>process-resources</phase>
             <goals>
-              <goal>copy-resources</goal>
+              <goal>copy-resources</goal> <!--4-->
             </goals>
             <configuration>
               <outputDirectory>${project.build.outputDirectory}/webroot</outputDirectory>
@@ -99,6 +100,7 @@
           </execution>
         </executions>
       </plugin>
+      <!-- end::maven-frontend-build[] -->
     </plugins>
   </build>
 

@@ -1,3 +1,4 @@
+// tag::gradle-npm-plugin[]
 import com.moowork.gradle.node.npm.NpmTask
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
   application
   id("com.moowork.node") version "1.3.1"
 }
+// end::gradle-npm-plugin[]
 
 repositories {
   mavenCentral()
@@ -23,6 +25,7 @@ application {
 }
 // end::application-main[]
 
+// tag::gradle-frontend-build[]
 node {
   version = "10.15.3"
   npmVersion = "6.4.1"
@@ -44,6 +47,7 @@ val copyToWebRoot by tasks.creating(Copy::class) {
 val processResources by tasks.getting(ProcessResources::class) {
   dependsOn(copyToWebRoot)
 }
+// end::gradle-frontend-build[]
 
 tasks.wrapper {
   gradleVersion = "5.2"
