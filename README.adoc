@@ -243,7 +243,7 @@ Hello React from Vert.x!
 
 This document covered:
 
-. the creation of a new React application with `reate-react-app`
+. the creation of a new React application with `create-react-app`
 . running a frontend development server (for live-reload) that delegates API requests to the Vert.x backend
 . bundling the frontend static files together with the Vert.x classes when going to production
 
