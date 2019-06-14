@@ -41,7 +41,7 @@ The code of this project contains Maven and Gradle build files that are function
 
 Add the `vertx-web` dependency in you Maven POM file:
 
-[source,xml,role="collapsed"]
+[source,xml]
 .Maven `pom.xml`
 ----
 include::pom.xml[tag=dependencies]
@@ -49,7 +49,7 @@ include::pom.xml[tag=dependencies]
 
 Then add the `exec-maven-plugin`:
 
-[source,xml,role="collapsed"]
+[source,xml]
 .Maven `pom.xml`
 ----
 include::pom.xml[tag=exec-plugin]
@@ -59,7 +59,7 @@ include::pom.xml[tag=exec-plugin]
 
 Assuming you use Gradle with the Kotlin DSL, add the `vertx-web` dependency:
 
-[source,kotlin,role="collapsed"]
+[source,kotlin]
 .Gradle `build.gradle.kts`
 ----
 include::build.gradle.kts[tag=dependencies]
@@ -67,7 +67,7 @@ include::build.gradle.kts[tag=dependencies]
 
 Then configure the application main class:
 
-[source,kotlin,role="collapsed"]
+[source,kotlin]
 .Gradle `build.gradle.kts`
 ----
 include::build.gradle.kts[tag=application-main]
@@ -78,7 +78,7 @@ include::build.gradle.kts[tag=application-main]
 Let's start with the backend service.
 It shall handle requests on the `/api/message` path by retuning a greeting message:
 
-[source,java,role="collapsed"]
+[source,java]
 .Java `src/main/java/io/vertx/howtos/react/BackendVerticle.java`
 ----
 include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=backend]
@@ -92,7 +92,7 @@ Keep in mind that when the whole application is built and put to production, the
 
 Before we can test the implementation, the `BackendVerticle` needs a `main` method:
 
-[source,java,role="collapsed"]
+[source,java]
 .Java `src/main/java/io/vertx/howtos/react/BackendVerticle.java`
 ----
 include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=main]
@@ -202,7 +202,7 @@ This is why you must copy static files to `src/main/resources/webroot`.
 
 Add these plugins to your Maven POM file:
 
-[source,xml,role="collapsed"]
+[source,xml]
 .Maven `pom.xml`
 ----
 include::pom.xml[tag=maven-frontend-build]
@@ -214,7 +214,7 @@ include::pom.xml[tag=maven-frontend-build]
 
 If you use Gradle, first add the Gradle NPM plugin:
 
-[source,kotlin,role="collapsed"]
+[source,kotlin]
 .Gradle `build.gradle.kts`
 ----
 include::build.gradle.kts[tag=gradle-npm-plugin]
@@ -222,7 +222,7 @@ include::build.gradle.kts[tag=gradle-npm-plugin]
 
 Then the configuration is similar to what we did with Maven:
 
-[source,kotlin,role="collapsed"]
+[source,kotlin]
 .Gradle `build.gradle.kts`
 ----
 include::build.gradle.kts[tag=gradle-frontend-build]
