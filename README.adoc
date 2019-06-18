@@ -1,0 +1,257 @@
+= Single Page Application development with React and Vert.x
+:page-permalink: /
+:page-github: vertx-howtos/single-page-react-vertx-howto
+
+ifdef::env-github[]
+image:https://travis-ci.org/vertx-howtos/single-page-react-vertx-howto.svg?branch=master["Build Status", link="https://travis-ci.org/vertx-howtos/single-page-react-vertx-howto"]
+endif::env-github[]
+
+This document will show you how to develop a Single Page Application (SPA) with React and Vert.x.
+
+== What you will build
+
+You will create a React frontend communicating over HTTP with a Vert.x backend.
+
+== Development workflow
+
+When developing an SPA, it is very convenient to get instant feedback after updating a Javascript, HTML or CSS file.
+With React, this requires you start a development server with `npm` that handles requests for frontend resources:
+
+image::workflow.svg[Frontend resource]
+
+But what about requests that must be processed by Vert.x?
+You will configure the project so that the frontend development server proxies API requests to the backend:
+
+image::workflow-api.svg[API request]
+
+== What you need
+
+* A text editor or IDE
+* Java 8 or higher
+* Maven or Gradle
+* Node
+* `npm`
+* https://www.npmjs.com/package/npx#install[`npx`], an NPM package runner
+
+== Create a project
+
+The code of this project contains Maven and Gradle build files that are functionally equivalent.
+
+=== Using Maven
+
+Add the `vertx-web` dependency in you Maven POM file:
+
+[source,xml]
+.Maven `pom.xml`
+----
+include::pom.xml[tag=dependencies]
+----
+
+Then add the `exec-maven-plugin`:
+
+[source,xml]
+.Maven `pom.xml`
+----
+include::pom.xml[tag=exec-plugin]
+----
+
+=== Using Gradle
+
+Assuming you use Gradle with the Kotlin DSL, add the `vertx-web` dependency:
+
+[source,kotlin]
+.Gradle `build.gradle.kts`
+----
+include::build.gradle.kts[tag=dependencies]
+----
+
+Then configure the application main class:
+
+[source,kotlin]
+.Gradle `build.gradle.kts`
+----
+include::build.gradle.kts[tag=application-main]
+----
+
+== Expose a message service over HTTP
+
+Let's start with the backend service.
+It shall handle requests on the `/api/message` path by retuning a greeting message:
+
+[source,java]
+.Java `src/main/java/io/vertx/howtos/react/BackendVerticle.java`
+----
+include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=backend]
+----
+<1> A Vert.x Web `Route` is defined to match HTTP requests on the `/api/message` path
+<2> The `Route` handler replies to requests with a greeting message
+<3> The `StaticHandler` is required to handle requests for static resources
+
+IMPORTANT: You may wonder why we need a `StaticHandler` if the frontend development server handles static resources?
+Keep in mind that when the whole application is built and put to production, the frontend will be bundled with and served by the backend HTTP server.
+
+Before we can test the implementation, the `BackendVerticle` needs a `main` method:
+
+[source,java]
+.Java `src/main/java/io/vertx/howtos/react/BackendVerticle.java`
+----
+include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=main]
+----
+<1> Create a `Vertx` context
+<2> Deploy `BackendVerticle`
+
+You can run the application:
+
+* straight from your IDE or,
+* with Maven: `mvn compile exec:java`, or
+* with Gradle: `./gradlew run` (Linux, macOS) or `gradlew run` (Windows).
+
+NOTE: The following example uses the https://httpie.org/[HTTPie] command line HTTP client.
+Please refer to the https://httpie.org/doc#installation[installation] documentation if you don't have it installed on your system yet.
+
+To receive a greeting, open your terminal and execute this:
+
+[source,shell]
+----
+http :8080/api/message
+----
+
+You should see:
+
+[source,javascript]
+----
+HTTP/1.1 200 OK
+content-length: 24
+
+Hello React from Vert.x!
+----
+
+== Displaying the message in the browser
+
+We have a fully operational backend, we can create the frontend.
+To do so, run the `create-react-app` package with `npx`:
+
+[source,shell]
+----
+cd src/main
+npx create-react-app frontend
+----
+
+This will:
+
+* create a `package.json` file that defines dependencies as well as build and run scripts
+* install the dependencies
+* generate a skeleton application
+
+NOTE: In this how-to, the frontend code lives as part of the backend project, inside the `src` directory.
+This is easier to get started, in particular if your team includes more backend-oriented developers.
+However, as you project grows, you might prefer to split the frontend and the backend into separate modules.
+
+The skeleton application is not of great interest here so let's remove it:
+
+[source,shell]
+----
+rm -rf frontend/src/*
+----
+
+Then open your favorite editor and implement the React frontend:
+
+[source,javascript]
+.Javascript `src/main/frontend/src/index.js`
+----
+include::src/main/frontend/src/index.js[]
+----
+<1> Our frontend consists in a single React `Greeter` component
+<2> The `Greeter` component holds state, which is a message to display in the browser
+<3> The message is displayed within a simple HTML `span`
+<4> The `Greeter` component is rendered in the web page
+<5> After initial rendering, an HTTP request is sent to the backend; the result is used to udpate the component state
+
+Last but not least, you must configure the frontend development server to proxy API requests to the backend.
+Open the `package.json` file in you editor and add:
+
+[source,javascript]
+.Javascript `src/main/frontend/package.json`
+----
+"proxy": "http://localhost:8080"
+----
+
+That's it, open a terminal and start the frontend development server:
+
+[source,shell]
+----
+cd src/main/frontend
+npm start
+----
+
+A browser tab should automatically be opened and pointing to http://localhost:3000.
+
+You should see:
+
+----
+Hello React from Vert.x!
+----
+
+== Putting it all together
+
+In production of course you will not start a frontend development server.
+So the Maven POM (or Gradle build) file shall be configured to:
+
+- run a frontend build
+- copy the static files to the `src/main/resources/webroot` folder
+
+NOTE: Do you remember the `StaticHandler` from the first section?
+It looks for static files in the `webroot` folder by default.
+This is why you must copy static files to `src/main/resources/webroot`.
+
+Add these plugins to your Maven POM file:
+
+[source,xml]
+.Maven `pom.xml`
+----
+include::pom.xml[tag=maven-frontend-build]
+----
+<1> Downloading Node and `npm` in the build directory allows to run the frontend build on CI where they might not be present
+<2> Download frontend dependencies with `npm install`
+<3> Create a production-ready build of the frontend
+<4> Copy static files to `src/main/resources/webroot`
+
+If you use Gradle, first add the Gradle NPM plugin:
+
+[source,kotlin]
+.Gradle `build.gradle.kts`
+----
+include::build.gradle.kts[tag=gradle-npm-plugin]
+----
+
+Then the configuration is similar to what we did with Maven:
+
+[source,kotlin]
+.Gradle `build.gradle.kts`
+----
+include::build.gradle.kts[tag=gradle-frontend-build]
+----
+
+Make sure all previous `npm`, `mvn` or `gradlew` executions are terminated and start the Vert.x server:
+
+* with Maven: `mvn compile exec:java`, or
+* with Gradle: `./gradlew run` (Linux, macOS) or `gradlew run` (Windows).
+
+Browse to http://localhost:8080 and you should see:
+
+----
+Hello React from Vert.x!
+----
+
+== Summary
+
+This document covered:
+
+. the creation of a new React application with `create-react-app`
+. running a frontend development server (for live-reload) that delegates API requests to the Vert.x backend
+. bundling the frontend static files together with the Vert.x classes when going to production
+
+== See also
+
+- https://facebook.github.io/create-react-app/[Create React App]
+- https://vertx.io/docs/vertx-web/java/[The Vert.x Web documentation]
