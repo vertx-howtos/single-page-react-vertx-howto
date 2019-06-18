@@ -143,6 +143,10 @@ This will:
 * install the dependencies
 * generate a skeleton application
 
+NOTE: In this how-to, the frontend code lives as part of the backend project, inside the `src` directory.
+This is easier to get started, in particular if your team includes more backend-oriented developers.
+However, as you project grows, you might prefer to split the frontend and the backend into separate modules.
+
 The skeleton application is not of great interest here so let's remove it:
 
 [source,shell]
