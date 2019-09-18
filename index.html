@@ -159,9 +159,9 @@ You will configure the project so that the frontend development server proxies A
 <div class="listingblock">
 <div class="title">Gradle <code>build.gradle.kts</code></div>
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="background-color: #f8f8f8">dependencies</span> <span style="background-color: #f8f8f8">{</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="color: #990000;font-weight: bold">dependencies</span> <span style="background-color: #f8f8f8">{</span>
   <span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">vertxVersion</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #d14">"3.7.0"</span>
-  <span style="background-color: #f8f8f8">implementation</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"io.vertx:vertx-web:${vertxVersion}"</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #990000;font-weight: bold">implementation</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"io.vertx:vertx-web:${vertxVersion}"</span><span style="background-color: #f8f8f8">)</span>
 <span style="background-color: #f8f8f8">}</span></code></pre>
 </div>
 </div>
@@ -171,7 +171,7 @@ You will configure the project so that the frontend development server proxies A
 <div class="listingblock">
 <div class="title">Gradle <code>build.gradle.kts</code></div>
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="background-color: #f8f8f8">application</span> <span style="background-color: #f8f8f8">{</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="color: #990000;font-weight: bold">application</span> <span style="background-color: #f8f8f8">{</span>
   <span style="background-color: #f8f8f8">mainClassName</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #d14">"io.vertx.howtos.react.BackendVerticle"</span>
 <span style="background-color: #f8f8f8">}</span></code></pre>
 </div>
@@ -566,10 +566,10 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
 <div class="content">
 <pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="color: #000000;font-weight: bold">import</span> <span style="color: #555555">com.moowork.gradle.node.npm.NpmTask</span>
 
-<span style="background-color: #f8f8f8">plugins</span> <span style="background-color: #f8f8f8">{</span>
+<span style="color: #990000;font-weight: bold">plugins</span> <span style="background-color: #f8f8f8">{</span>
   <span style="background-color: #f8f8f8">java</span>
   <span style="background-color: #f8f8f8">application</span>
-  <span style="background-color: #f8f8f8">id</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"com.moowork.node"</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">version</span> <span style="color: #d14">"1.3.1"</span>
+  <span style="color: #990000;font-weight: bold">id</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"com.moowork.node"</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">version</span> <span style="color: #d14">"1.3.1"</span>
 <span style="background-color: #f8f8f8">}</span></code></pre>
 </div>
 </div>
@@ -579,26 +579,26 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
 <div class="listingblock">
 <div class="title">Gradle <code>build.gradle.kts</code></div>
 <div class="content">
-<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="background-color: #f8f8f8">node</span> <span style="background-color: #f8f8f8">{</span>
+<pre class="rouge highlight" style="background-color: #f8f8f8"><code data-lang="kotlin"><span style="color: #990000;font-weight: bold">node</span> <span style="background-color: #f8f8f8">{</span>
   <span style="background-color: #f8f8f8">version</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #d14">"10.15.3"</span>
   <span style="background-color: #f8f8f8">npmVersion</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #d14">"6.4.1"</span>
   <span style="background-color: #f8f8f8">download</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #000000;font-weight: bold">true</span>
-  <span style="background-color: #f8f8f8">nodeModulesDir</span> <span style="background-color: #f8f8f8">=</span> <span style="background-color: #f8f8f8">File</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"src/main/frontend"</span><span style="background-color: #f8f8f8">)</span>
+  <span style="background-color: #f8f8f8">nodeModulesDir</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #445588;font-weight: bold">File</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"src/main/frontend"</span><span style="background-color: #f8f8f8">)</span>
 <span style="background-color: #f8f8f8">}</span>
 
-<span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">buildFrontend</span> <span style="color: #000000;font-weight: bold">by</span> <span style="background-color: #f8f8f8">tasks</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">creating</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">NpmTask</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #000000;font-weight: bold">class</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
-  <span style="background-color: #f8f8f8">setArgs</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">listOf</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"run"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #d14">"build"</span><span style="background-color: #f8f8f8">))</span>
-  <span style="background-color: #f8f8f8">dependsOn</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"npmInstall"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">buildFrontend</span> <span style="color: #000000;font-weight: bold">by</span> <span style="background-color: #f8f8f8">tasks</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">creating</span><span style="background-color: #f8f8f8">(</span><span style="color: #445588;font-weight: bold">NpmTask</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #000000;font-weight: bold">class</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
+  <span style="color: #990000;font-weight: bold">setArgs</span><span style="background-color: #f8f8f8">(</span><span style="color: #990000;font-weight: bold">listOf</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"run"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #d14">"build"</span><span style="background-color: #f8f8f8">))</span>
+  <span style="color: #990000;font-weight: bold">dependsOn</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"npmInstall"</span><span style="background-color: #f8f8f8">)</span>
 <span style="background-color: #f8f8f8">}</span>
 
-<span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">copyToWebRoot</span> <span style="color: #000000;font-weight: bold">by</span> <span style="background-color: #f8f8f8">tasks</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">creating</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">Copy</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #000000;font-weight: bold">class</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
-  <span style="background-color: #f8f8f8">from</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"src/main/frontend/build"</span><span style="background-color: #f8f8f8">)</span>
-  <span style="background-color: #f8f8f8">destinationDir</span> <span style="background-color: #f8f8f8">=</span> <span style="background-color: #f8f8f8">File</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"${buildDir}/classes/java/main/webroot"</span><span style="background-color: #f8f8f8">)</span>
-  <span style="background-color: #f8f8f8">dependsOn</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">buildFrontend</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">copyToWebRoot</span> <span style="color: #000000;font-weight: bold">by</span> <span style="background-color: #f8f8f8">tasks</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">creating</span><span style="background-color: #f8f8f8">(</span><span style="color: #445588;font-weight: bold">Copy</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #000000;font-weight: bold">class</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
+  <span style="color: #990000;font-weight: bold">from</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"src/main/frontend/build"</span><span style="background-color: #f8f8f8">)</span>
+  <span style="background-color: #f8f8f8">destinationDir</span> <span style="background-color: #f8f8f8">=</span> <span style="color: #445588;font-weight: bold">File</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"${buildDir}/classes/java/main/webroot"</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #990000;font-weight: bold">dependsOn</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">buildFrontend</span><span style="background-color: #f8f8f8">)</span>
 <span style="background-color: #f8f8f8">}</span>
 
-<span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">processResources</span> <span style="color: #000000;font-weight: bold">by</span> <span style="background-color: #f8f8f8">tasks</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">getting</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">ProcessResources</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #000000;font-weight: bold">class</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
-  <span style="background-color: #f8f8f8">dependsOn</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">copyToWebRoot</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #000000;font-weight: bold">val</span> <span style="background-color: #f8f8f8">processResources</span> <span style="color: #000000;font-weight: bold">by</span> <span style="background-color: #f8f8f8">tasks</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">getting</span><span style="background-color: #f8f8f8">(</span><span style="color: #445588;font-weight: bold">ProcessResources</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #000000;font-weight: bold">class</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
+  <span style="color: #990000;font-weight: bold">dependsOn</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">copyToWebRoot</span><span style="background-color: #f8f8f8">)</span>
 <span style="background-color: #f8f8f8">}</span></code></pre>
 </div>
 </div>
@@ -764,7 +764,7 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
   <div class="row">
     <div class="col">
       <hr>
-      <p><small>Last published: 2019-09-17 15:24:21 +0000.</small></p>
+      <p><small>Last published: 2019-09-18 15:25:09 +0000.</small></p>
     </div>
   </div>
 </div>
