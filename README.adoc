@@ -37,24 +37,6 @@ image::workflow-api.svg[API request]
 
 The code of this project contains Maven and Gradle build files that are functionally equivalent.
 
-=== Using Maven
-
-Add the `vertx-web` dependency in you Maven POM file:
-
-[source,xml]
-.Maven `pom.xml`
-----
-include::pom.xml[tag=dependencies]
-----
-
-Then add the `exec-maven-plugin`:
-
-[source,xml]
-.Maven `pom.xml`
-----
-include::pom.xml[tag=exec-plugin]
-----
-
 === Using Gradle
 
 Assuming you use Gradle with the Kotlin DSL, add the `vertx-web` dependency:
@@ -103,7 +85,6 @@ include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=main]
 You can run the application:
 
 * straight from your IDE or,
-* with Maven: `mvn compile exec:java`, or
 * with Gradle: `./gradlew run` (Linux, macOS) or `gradlew run` (Windows).
 
 NOTE: The following example uses the https://httpie.org/[HTTPie] command line HTTP client.
@@ -118,7 +99,7 @@ http :8080/api/message
 
 You should see:
 
-[source,javascript]
+[source]
 ----
 HTTP/1.1 200 OK
 content-length: 24
@@ -170,10 +151,12 @@ include::src/main/frontend/src/index.js[]
 Last but not least, you must configure the frontend development server to proxy API requests to the backend.
 Open the `package.json` file in you editor and add:
 
-[source,javascript]
+[source,json]
 .Javascript `src/main/frontend/package.json`
 ----
-"proxy": "http://localhost:8080"
+{
+  "proxy": "http://localhost:8080"
+}
 ----
 
 That's it, open a terminal and start the frontend development server:
@@ -204,18 +187,6 @@ NOTE: Do you remember the `StaticHandler` from the first section?
 It looks for static files in the `webroot` folder by default.
 This is why you must copy static files to `src/main/resources/webroot`.
 
-Add these plugins to your Maven POM file:
-
-[source,xml]
-.Maven `pom.xml`
-----
-include::pom.xml[tag=maven-frontend-build]
-----
-<1> Downloading Node and `npm` in the build directory allows to run the frontend build on CI where they might not be present
-<2> Download frontend dependencies with `npm install`
-<3> Create a production-ready build of the frontend
-<4> Copy static files to `src/main/resources/webroot`
-
 If you use Gradle, first add the Gradle NPM plugin:
 
 [source,kotlin]
@@ -224,17 +195,20 @@ If you use Gradle, first add the Gradle NPM plugin:
 include::build.gradle.kts[tag=gradle-npm-plugin]
 ----
 
-Then the configuration is similar to what we did with Maven:
+Then the configuration:
 
 [source,kotlin]
 .Gradle `build.gradle.kts`
 ----
 include::build.gradle.kts[tag=gradle-frontend-build]
 ----
+<1> Downloading Node and `npm` in the build directory allows to run the frontend build on CI where they might not be present
+<2> Download frontend dependencies with `npm install`
+<3> Create a production-ready build of the frontend
+<4> Copy static files to `src/main/resources/webroot`
 
-Make sure all previous `npm`, `mvn` or `gradlew` executions are terminated and start the Vert.x server:
+Make sure all previous `npm` and `gradlew` executions are terminated and start the Vert.x server:
 
-* with Maven: `mvn compile exec:java`, or
 * with Gradle: `./gradlew run` (Linux, macOS) or `gradlew run` (Windows).
 
 Browse to http://localhost:8080 and you should see:

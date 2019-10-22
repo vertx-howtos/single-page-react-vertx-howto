@@ -26,19 +26,19 @@ application {
 // end::application-main[]
 
 // tag::gradle-frontend-build[]
-node {
+node { // <1>
   version = "10.15.3"
   npmVersion = "6.4.1"
   download = true
   nodeModulesDir = File("src/main/frontend")
 }
 
-val buildFrontend by tasks.creating(NpmTask::class) {
+val buildFrontend by tasks.creating(NpmTask::class) { // <3>
   setArgs(listOf("run", "build"))
-  dependsOn("npmInstall")
+  dependsOn("npmInstall") // <2>
 }
 
-val copyToWebRoot by tasks.creating(Copy::class) {
+val copyToWebRoot by tasks.creating(Copy::class) { // <4>
   from("src/main/frontend/build")
   destinationDir = File("${buildDir}/classes/java/main/webroot")
   dependsOn(buildFrontend)
