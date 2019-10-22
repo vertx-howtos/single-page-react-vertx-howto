@@ -140,14 +140,14 @@ Then open your favorite editor and implement the React frontend:
 [source,javascript]
 .Javascript `src/main/frontend/src/index.jsx`
 ----
-include::src/main/frontend/src/index.jsx[]
+include::src/main/frontend/src/index.tsx[]
 ----
-<1> The `Greeter` component is rendered in the web page
+<1> The `Greeter` component is rendered in the web page inside `App` component
 
 [source,javascript]
 .Javascript `src/main/frontend/src/components/Greeter.jsx`
 ----
-include::src/main/frontend/src/components/Greeter.jsx[]
+include::src/main/frontend/src/components/Greeter.tsx[]
 ----
 <1> Our frontend consists in a single React `Greeter` component
 <2> The `Greeter` component holds state, which is a message to display in the browser

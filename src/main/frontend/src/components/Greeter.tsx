@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-export class Greeter extends React.Component { // <1>
+export class Greeter extends React.Component<any, { message: string }> { // <1>
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = { // <2>
       message: "Default message"
@@ -18,7 +18,7 @@ export class Greeter extends React.Component { // <1>
   render() { // <3>
     return (
       <div>
-        <span>{this.state.message}</span>
+        <span>Message: {this.state.message}</span>
       </div>
     );
   }
