@@ -1,4 +1,5 @@
 // tag::gradle-npm-plugin[]
+import com.moowork.gradle.node.task.NodeTask
 import com.moowork.gradle.node.yarn.YarnTask
 
 plugins {
@@ -34,22 +35,34 @@ node { // <1>
   nodeModulesDir = File("src/main/frontend")
 }
 
-val buildFrontend by tasks.creating(YarnTask::class) { // <3>
-  args = listOf("build")
-  dependsOn("yarn") // <2>
-}
+tasks {
+  val buildFrontend by creating(YarnTask::class) { // <3>
+    args = listOf("build")
+    dependsOn("yarn") // <2>
+  }
 
-val copyToWebRoot by tasks.creating(Copy::class) { // <4>
-  from("src/main/frontend/build")
-  destinationDir = File("${buildDir}/classes/java/main/webroot")
-  dependsOn(buildFrontend)
-}
+  val copyToWebRoot by creating(Copy::class) { // <4>
+    from("src/main/frontend/build")
+    destinationDir = File("${buildDir}/classes/java/main/webroot")
+    dependsOn(buildFrontend)
+  }
 
-val processResources by tasks.getting(ProcessResources::class) {
-  dependsOn(copyToWebRoot)
-}
+  "processResources"(ProcessResources::class) {
+    dependsOn(copyToWebRoot)
+  }
 // end::gradle-frontend-build[]
 
-tasks.wrapper {
-  gradleVersion = "5.2"
+  val jest by creating(YarnTask::class) {
+    setEnvironment(mapOf("CI" to "true"))
+    args = listOf("test")
+    dependsOn("yarn")
+  }
+
+  test {
+    dependsOn(jest)
+  }
+
+  wrapper {
+    gradleVersion = "5.2"
+  }
 }
