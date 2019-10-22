@@ -1,5 +1,5 @@
 // tag::gradle-npm-plugin[]
-import com.moowork.gradle.node.npm.NpmTask
+import com.moowork.gradle.node.yarn.YarnTask
 
 plugins {
   java
@@ -29,13 +29,14 @@ application {
 node { // <1>
   version = "10.15.3"
   npmVersion = "6.4.1"
+  yarnVersion = "1.9.4"
   download = true
   nodeModulesDir = File("src/main/frontend")
 }
 
-val buildFrontend by tasks.creating(NpmTask::class) { // <3>
-  setArgs(listOf("run", "build"))
-  dependsOn("npmInstall") // <2>
+val buildFrontend by tasks.creating(YarnTask::class) { // <3>
+  args = listOf("build")
+  dependsOn("yarn") // <2>
 }
 
 val copyToWebRoot by tasks.creating(Copy::class) { // <4>
