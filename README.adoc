@@ -138,15 +138,21 @@ rm -rf frontend/src/*
 Then open your favorite editor and implement the React frontend:
 
 [source,javascript]
-.Javascript `src/main/frontend/src/index.js`
+.Javascript `src/main/frontend/src/index.jsx`
 ----
-include::src/main/frontend/src/index.js[]
+include::src/main/frontend/src/index.jsx[]
+----
+<1> The `Greeter` component is rendered in the web page
+
+[source,javascript]
+.Javascript `src/main/frontend/src/components/Greeter.jsx`
+----
+include::src/main/frontend/src/components/Greeter.jsx[]
 ----
 <1> Our frontend consists in a single React `Greeter` component
 <2> The `Greeter` component holds state, which is a message to display in the browser
 <3> The message is displayed within a simple HTML `span`
-<4> The `Greeter` component is rendered in the web page
-<5> After initial rendering, an HTTP request is sent to the backend; the result is used to udpate the component state
+<4> After initial rendering, an HTTP request is sent to the backend; the result is used to udpate the component state
 
 Last but not least, you must configure the frontend development server to proxy API requests to the backend.
 Open the `package.json` file in you editor and add:

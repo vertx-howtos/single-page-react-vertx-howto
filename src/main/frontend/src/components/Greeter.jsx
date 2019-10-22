@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
 
-class Greeter extends React.Component { // <1>
+export class Greeter extends React.Component { // <1>
 
   constructor(props) {
     super(props);
@@ -10,7 +9,7 @@ class Greeter extends React.Component { // <1>
     }
   }
 
-  componentDidMount() { // <5>
+  componentDidMount() { // <4>
     fetch("/api/message")
       .then(response => response.text())
       .then(text => this.setState({message: text}));
@@ -24,8 +23,3 @@ class Greeter extends React.Component { // <1>
     );
   }
 }
-
-ReactDOM.render( // <4>
-  <Greeter/>,
-  document.getElementById('root')
-);
