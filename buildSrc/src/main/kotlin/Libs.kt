@@ -70,6 +70,10 @@ object Libs {
 
   const val vertx_web_api_contract: String = "io.vertx:vertx-web-api-contract:" + Versions.io_vertx
 
+  const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String =
+      "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin:" +
+      Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
+
   const val de_fayard_refreshversions_gradle_plugin: String =
       "de.fayard.refreshVersions:de.fayard.refreshVersions.gradle.plugin:" +
       Versions.de_fayard_refreshversions_gradle_plugin
@@ -100,4 +104,9 @@ object Libs {
    * http://www.slf4j.org
    */
   const val slf4j_api: String = "org.slf4j:slf4j-api:" + Versions.slf4j_api
+
+  /**
+   * https://github.com/pinterest/ktlint
+   */
+  const val ktlint: String = "com.pinterest:ktlint:" + Versions.ktlint
 }

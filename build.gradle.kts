@@ -7,7 +7,7 @@ plugins {
   kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
   kotlin("kapt") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
   application
-  id("org.jlleitschuh.gradle.ktlint") version "9.0.0"
+  id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
   id("com.moowork.node") version Versions.com_moowork_node_gradle_plugin
   id("de.fayard.refreshVersions") version Versions.de_fayard_refreshversions_gradle_plugin
 }
@@ -55,9 +55,9 @@ application {
 
 // tag::gradle-frontend-build[]
 node { // <1>
-  version = "10.15.3"
-  npmVersion = "6.4.1"
-  yarnVersion = "1.9.4"
+  version = Versions.node_version
+  npmVersion = Versions.npm_version
+  yarnVersion = Versions.yarn_version
   download = true
   nodeModulesDir = File("src/main/frontend")
 }
