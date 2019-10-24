@@ -4,6 +4,9 @@
 
 ifdef::env-github[]
 image:https://travis-ci.com/NiccoMlt/single-page-react-vertx-howto.svg?branch=master["Build Status", link="https://travis-ci.com/NiccoMlt/single-page-react-vertx-howto"]
+image:https://img.shields.io/badge/vert.x-3.8.3-purple.svg[link="https://vertx.io"]
+
+This application was partially generated using http://start.vertx.io
 endif::env-github[]
 
 This document will show you how to develop a Single Page Application (SPA) with React and Vert.x.
@@ -60,10 +63,10 @@ include::build.gradle.kts[tag=application-main]
 Let's start with the backend service.
 It shall handle requests on the `/api/message` path by retuning a greeting message:
 
-[source,java]
-.Java `src/main/java/io/vertx/howtos/react/BackendVerticle.java`
+[source,kotlin]
+.Java `src/main/kotlin/io/vertx/howtos/react/BackendVerticle.kt`
 ----
-include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=backend]
+include::src/main/kotlin/io/vertx/howtos/react/BackendVerticle.kt[tag=backend]
 ----
 <1> A Vert.x Web `Route` is defined to match HTTP requests on the `/api/message` path
 <2> The `Route` handler replies to requests with a greeting message
@@ -74,10 +77,10 @@ Keep in mind that when the whole application is built and put to production, the
 
 Before we can test the implementation, the `BackendVerticle` needs a `main` method:
 
-[source,java]
-.Java `src/main/java/io/vertx/howtos/react/BackendVerticle.java`
+[source,kotlin]
+.Kotlin `src/main/kotlin/io/vertx/howtos/react/BackendVerticle.kt`
 ----
-include::src/main/java/io/vertx/howtos/react/BackendVerticle.java[tag=main]
+include::src/main/kotlin/io/vertx/howtos/react/BackendVerticle.kt[tag=main]
 ----
 <1> Create a `Vertx` context
 <2> Deploy `BackendVerticle`
