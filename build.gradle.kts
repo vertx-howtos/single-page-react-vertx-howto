@@ -80,7 +80,7 @@ tasks {
 
   val copyToWebRoot by creating(Copy::class) { // <4>
     from("src/main/frontend/build")
-    destinationDir = File("${buildDir}/classes/kotlin/main/webroot")
+    destinationDir = File("$buildDir/classes/kotlin/main/webroot")
     dependsOn(buildFrontend)
   }
 
