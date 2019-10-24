@@ -1,8 +1,10 @@
-// tag::gradle-npm-plugin[]
+@file:Suppress("UnstableApiUsage")
+
 import com.moowork.gradle.node.yarn.YarnTask
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+// tag::gradle-npm-plugin[]
 plugins {
   kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
   kotlin("kapt") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
@@ -10,6 +12,7 @@ plugins {
   id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
   id("com.moowork.node") version Versions.com_moowork_node_gradle_plugin
   id("de.fayard.refreshVersions") version Versions.de_fayard_refreshversions_gradle_plugin
+  jacoco
 }
 // end::gradle-npm-plugin[]
 
@@ -98,5 +101,24 @@ tasks {
       events.addAll(listOf(TestLogEvent.PASSED, TestLogEvent.FAILED, TestLogEvent.SKIPPED))
     }
     dependsOn(jest)
+  }
+
+  jacocoTestReport {
+    reports {
+      xml.isEnabled = false
+      csv.isEnabled = false
+      html.isEnabled = true
+      html.destination = file("$buildDir/reports/coverage")
+    }
+  }
+
+  jacocoTestCoverageVerification {
+    violationRules {
+      rule {
+        limit {
+          minimum = "0.9".toBigDecimal()
+        }
+      }
+    }
   }
 }
