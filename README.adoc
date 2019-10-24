@@ -5,6 +5,7 @@
 ifdef::env-github[]
 image:https://travis-ci.com/NiccoMlt/single-page-react-vertx-howto.svg?branch=master["Build Status", link="https://travis-ci.com/NiccoMlt/single-page-react-vertx-howto"]
 image:https://img.shields.io/badge/vert.x-3.8.3-purple.svg[link="https://vertx.io"]
+image:https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg["https://ktlint.github.io/"]
 
 This application was partially generated using http://start.vertx.io
 endif::env-github[]

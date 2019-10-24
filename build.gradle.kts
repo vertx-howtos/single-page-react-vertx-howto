@@ -4,10 +4,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  java
   kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
   kotlin("kapt") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
   application
+  id("org.jlleitschuh.gradle.ktlint") version "9.0.0"
   id("com.moowork.node") version Versions.com_moowork_node_gradle_plugin
   id("de.fayard.refreshVersions") version Versions.de_fayard_refreshversions_gradle_plugin
 }
