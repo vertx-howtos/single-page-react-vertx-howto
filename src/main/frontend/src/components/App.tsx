@@ -1,28 +1,30 @@
 import React from 'react';
 import logo from '../logo.svg';
 import './App.css';
-import {Greeter} from "./Greeter";
+import Greeter from './Greeter';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+const App: React.FC = () => (
+  <div className="App">
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+          Edit
+        {' '}
+        <code>src/App.tsx</code>
+        {' '}
+and save to reload.
+      </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
           Learn React
-        </a>
-        <Greeter/>
-      </header>
-    </div>
-  );
-};
+      </a>
+      <Greeter />
+    </header>
+  </div>
+);
 
 export default App;
