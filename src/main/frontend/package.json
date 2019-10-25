@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.29",
     "axios": "^0.19.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
@@ -10,7 +13,8 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "typeface-roboto": "^0.0.75"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.3",
@@ -27,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "24.9.0",
     "react-test-renderer": "^16.11.0",
     "typescript": "3.6.4"
   },

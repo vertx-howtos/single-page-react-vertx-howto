@@ -1,0 +1,11 @@
+# Compiled JavaScript
+build/
+
+# Dependency directories
+node_modules/
+
+### Sass template
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
