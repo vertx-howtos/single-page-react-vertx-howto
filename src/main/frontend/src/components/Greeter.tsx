@@ -1,6 +1,9 @@
 import React from 'react';
+import axios, { AxiosResponse } from 'axios';
 
-class Greeter extends React.Component<any, { message: string }> { // <1>
+type GreeterState = { message: string };
+
+class Greeter extends React.Component<any, GreeterState> { // <1>
   constructor(props: any) {
     super(props);
     this.state = { // <2>
@@ -9,9 +12,12 @@ class Greeter extends React.Component<any, { message: string }> { // <1>
   }
 
   componentDidMount() { // <4>
-    fetch('/api/message')
-      .then((response) => response.text())
-      .then((text) => this.setState({ message: text }));
+    this.getMessages();
+  }
+
+  private async getMessages() {
+    const messages: AxiosResponse<string> = await axios.get('/api/message', { responseType: 'text' });
+    this.setState({ message: messages.data });
   }
 
   render() { // <3>
