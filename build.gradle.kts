@@ -4,7 +4,6 @@ import com.moowork.gradle.node.yarn.YarnTask
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-// tag::gradle-npm-plugin[]
 plugins {
   kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
   kotlin("kapt") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
@@ -14,13 +13,11 @@ plugins {
   id("de.fayard.refreshVersions") version Versions.de_fayard_refreshversions_gradle_plugin
   jacoco
 }
-// end::gradle-npm-plugin[]
 
 repositories {
   mavenCentral()
 }
 
-// tag::dependencies[]
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
   implementation(kotlin("reflect"))
@@ -43,21 +40,17 @@ dependencies {
   testRuntimeOnly(Libs.junit_jupiter_engine)
   testImplementation(Libs.junit_jupiter_api)
 }
-// end::dependencies[]
 
 java {
   sourceCompatibility = Versions.java_version
   targetCompatibility = Versions.java_version
 }
 
-// tag::application-main[]
 application {
   mainClassName = "io.vertx.howtos.react.BackendVerticle"
 }
-// end::application-main[]
 
-// tag::gradle-frontend-build[]
-node { // <1>
+node {
   version = Versions.node_version
   npmVersion = Versions.npm_version
   yarnVersion = Versions.yarn_version
@@ -73,12 +66,12 @@ tasks {
     }
   }
 
-  val buildFrontend by creating(YarnTask::class) { // <3>
+  val buildFrontend by creating(YarnTask::class) {
     args = listOf("build")
-    dependsOn("yarn") // <2>
+    dependsOn("yarn")
   }
 
-  val copyToWebRoot by creating(Copy::class) { // <4>
+  val copyToWebRoot by creating(Copy::class) {
     from("src/main/frontend/build")
     destinationDir = File("$buildDir/classes/kotlin/main/webroot")
     dependsOn(buildFrontend)
@@ -87,7 +80,6 @@ tasks {
   "processResources"(ProcessResources::class) {
     dependsOn(copyToWebRoot)
   }
-// end::gradle-frontend-build[]
 
   val jest by creating(YarnTask::class) {
     setEnvironment(mapOf("CI" to "true"))

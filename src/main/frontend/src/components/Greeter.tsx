@@ -3,15 +3,15 @@ import axios, { AxiosResponse } from 'axios';
 
 type GreeterState = { message: string };
 
-class Greeter extends React.Component<any, GreeterState> { // <1>
+class Greeter extends React.Component<any, GreeterState> {
   constructor(props: any) {
     super(props);
-    this.state = { // <2>
+    this.state = {
       message: 'Default message',
     };
   }
 
-  componentDidMount() { // <4>
+  componentDidMount() {
     this.getMessages();
   }
 
@@ -20,7 +20,7 @@ class Greeter extends React.Component<any, GreeterState> { // <1>
     this.setState({ message: messages.data });
   }
 
-  render() { // <3>
+  render() {
     const { message } = this.state;
     return (
       <div>
