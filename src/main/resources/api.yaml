@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  description: API description in Markdown.
+  version: 1.0.0
+servers:
+  - url: 'https://api.example.com'
+paths:
+  /message:
+    get:
+      summary: Get message.
+      description: Get example Vert.x message.
+      operationId: getMessage
+      responses:
+        '200':
+          content:
+            text/plain:
+              example:
+                schema:
+                  type: string
+                  example: Hello React from Vert.x!
+          description: OK

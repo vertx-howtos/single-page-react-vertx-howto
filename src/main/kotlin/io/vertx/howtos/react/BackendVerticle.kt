@@ -1,39 +1,37 @@
 package io.vertx.howtos.react
 
-import io.vertx.core.AbstractVerticle
-import io.vertx.core.Promise
-import io.vertx.core.Vertx
-import io.vertx.core.logging.SLF4JLogDelegateFactory
-import io.vertx.ext.web.Route
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.StaticHandler
+import io.vertx.kotlin.core.http.listenAwait
+import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.ext.web.api.contract.openapi3.OpenAPI3RouterFactory
 import mu.KotlinLogging
 
-class BackendVerticle(private val port: Int = DEFAULT_PORT) : AbstractVerticle() {
+class BackendVerticle(private val port: Int = DEFAULT_PORT) : CoroutineVerticle() {
 
   companion object {
     private const val DEFAULT_PORT: Int = 8080
   }
 
-  override fun start(startPromise: Promise<Void>) {
+  override suspend fun start() {
     val router: Router = Router.router(vertx)
-    val messageRoute: Route = router.get("/api/message")
-    messageRoute.handler {
-      it.response().end("Hello React from Vert.x!")
-    }
-
+    val apiRouter: Router = OpenAPI3RouterFactory
+      .createAwait(vertx, this::class.java.classLoader.getResource("api.yaml")
+          ?.toString()
+          ?: throw NoSuchElementException()
+      )
+      .addHandlerByOperationId("getMessage") {
+        it.response().end("Hello React from Vert.x!")
+      }
+      .router
+    router.mountSubRouter("/api/", apiRouter)
     router.get().handler(StaticHandler.create())
 
     vertx
       .createHttpServer()
       .requestHandler(router)
-      .listen(port) {
-        if (it.succeeded()) {
-          startPromise.complete()
-          KotlinLogging.logger {}.info { "HTTP server started on port $port" }
-        } else {
-          startPromise.fail(it.cause())
-        }
-      }
+      .listenAwait(port)
+
+    KotlinLogging.logger {}.info { "HTTP server started on port $port" }
   }
 }

@@ -60,7 +60,7 @@ node {
   nodeModulesDir = File("src/main/frontend")
 }
 
-val mainVerticleName = "io.vertx.starter.MainVerticle"
+val mainVerticleName = "io.vertx.howtos.MainVerticle"
 
 // Vert.x watches for file changes in all subdirectories
 // of src/ but only for files with .kt extension
@@ -143,5 +143,4 @@ tasks {
       include("META-INF/services/io.vertx.core.spi.VerticleFactory")
     }
   }
-
 }
