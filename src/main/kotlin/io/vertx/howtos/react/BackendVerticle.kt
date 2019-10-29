@@ -9,21 +9,10 @@ import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.StaticHandler
 import mu.KotlinLogging
 
-class BackendVerticle : AbstractVerticle() {
+class BackendVerticle(private val port: Int = DEFAULT_PORT) : AbstractVerticle() {
 
   companion object {
-    const val PORT: Int = 8080
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-      System.setProperty(
-        "vertx.logger-delegate-factory-class-name",
-        SLF4JLogDelegateFactory::class.qualifiedName ?: throw ClassNotFoundException()
-      )
-
-      val vertx = Vertx.vertx()
-      vertx.deployVerticle(BackendVerticle())
-    }
+    private const val DEFAULT_PORT: Int = 8080
   }
 
   override fun start(startPromise: Promise<Void>) {
@@ -38,10 +27,10 @@ class BackendVerticle : AbstractVerticle() {
     vertx
       .createHttpServer()
       .requestHandler(router)
-      .listen(PORT) {
+      .listen(port) {
         if (it.succeeded()) {
           startPromise.complete()
-          KotlinLogging.logger {}.info { "HTTP server started on port $PORT" }
+          KotlinLogging.logger {}.info { "HTTP server started on port $port" }
         } else {
           startPromise.fail(it.cause())
         }

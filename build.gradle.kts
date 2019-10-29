@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.moowork.gradle.node.yarn.YarnTask
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -12,6 +13,7 @@ plugins {
   id("com.moowork.node") version Versions.com_moowork_node_gradle_plugin
   id("de.fayard.refreshVersions") version Versions.de_fayard_refreshversions_gradle_plugin
   jacoco
+  id("com.github.johnrengelman.shadow") version Versions.com_github_johnrengelman_shadow_gradle_plugin
 }
 
 repositories {
@@ -47,7 +49,7 @@ java {
 }
 
 application {
-  mainClassName = "io.vertx.howtos.react.BackendVerticle"
+  mainClassName = "io.vertx.core.Launcher"
 }
 
 node {
@@ -57,6 +59,15 @@ node {
   download = true
   nodeModulesDir = File("src/main/frontend")
 }
+
+val mainVerticleName = "io.vertx.starter.MainVerticle"
+
+// Vert.x watches for file changes in all subdirectories
+// of src/ but only for files with .kt extension
+val watchForChange = "src/**/*.kt"
+
+// Vert.x will call this task on changes
+val doOnChange = "${projectDir}/gradlew classes"
 
 tasks {
   withType<KotlinCompile> {
@@ -113,4 +124,24 @@ tasks {
       }
     }
   }
+
+  getByName<JavaExec>("run") {
+    args = listOf(
+      "run", mainVerticleName,
+      "--redeploy=$watchForChange",
+      "--launcher-class=${application.mainClassName}",
+      "--on-redeploy=$doOnChange"
+    )
+  }
+
+  withType<ShadowJar> {
+    archiveClassifier.set("fat")
+    manifest {
+      attributes["Main-Verticle"] = mainVerticleName
+    }
+    mergeServiceFiles {
+      include("META-INF/services/io.vertx.core.spi.VerticleFactory")
+    }
+  }
+
 }

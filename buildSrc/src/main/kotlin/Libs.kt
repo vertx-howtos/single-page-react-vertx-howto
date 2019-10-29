@@ -70,6 +70,10 @@ object Libs {
 
   const val vertx_web_api_contract: String = "io.vertx:vertx-web-api-contract:" + Versions.io_vertx
 
+  const val com_github_johnrengelman_shadow_gradle_plugin: String =
+      "com.github.johnrengelman.shadow:com.github.johnrengelman.shadow.gradle.plugin:" +
+      Versions.com_github_johnrengelman_shadow_gradle_plugin
+
   const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String =
       "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin:" +
       Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
