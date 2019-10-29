@@ -15,8 +15,7 @@ paths:
         '200':
           content:
             text/plain:
-              example:
-                schema:
-                  type: string
-                  example: Hello React from Vert.x!
+              schema:
+                type: string
+                example: Hello React from Vert.x!
           description: OK
