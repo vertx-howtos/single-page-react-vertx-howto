@@ -1,5 +1,6 @@
 # Single Page Application development with React and Vert.x
 
+[![OpenAPI Validation](http://validator.swagger.io/validator?url=https://raw.githubusercontent.com/NiccoMlt/single-page-react-vertx-howto/master/src/main/resources/api.yaml)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/NiccoMlt/single-page-react-vertx-howto/master/src/main/resources/api.yaml)
 [![Build Status](https://travis-ci.com/NiccoMlt/single-page-react-vertx-howto.svg?branch=master)](https://travis-ci.com/NiccoMlt/single-page-react-vertx-howto)
 
 |              | Framework | Language | Style | 
