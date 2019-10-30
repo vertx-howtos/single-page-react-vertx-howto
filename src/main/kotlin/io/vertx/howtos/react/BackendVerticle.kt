@@ -1,6 +1,8 @@
 package io.vertx.howtos.react
 
 import io.vertx.ext.web.Router
+import io.vertx.ext.web.handler.LoggerFormat
+import io.vertx.ext.web.handler.LoggerHandler
 import io.vertx.ext.web.handler.StaticHandler
 import io.vertx.kotlin.core.http.listenAwait
 import io.vertx.kotlin.coroutines.CoroutineVerticle
@@ -15,8 +17,10 @@ class BackendVerticle(private val port: Int = DEFAULT_PORT) : CoroutineVerticle(
 
   override suspend fun start() {
     val router: Router = Router.router(vertx)
+    router.route().handler(LoggerHandler.create(LoggerFormat.SHORT))
     val apiRouter: Router = OpenAPI3RouterFactory
-      .createAwait(vertx, this::class.java.classLoader.getResource("api.yaml")
+      .createAwait(
+        vertx, this::class.java.classLoader.getResource("api.yaml")
           ?.toString()
           ?: throw NoSuchElementException()
       )
