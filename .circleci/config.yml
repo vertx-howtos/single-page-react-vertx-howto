@@ -1,8 +1,22 @@
 version: 2
 jobs:
-  build:
-    docker:
-        - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout # check out repository and clone it into the virtual environment
-      - run: echo "A first hello"
+ one:
+   docker:
+     - image: circleci/openjdk:8-jdk
+   steps:
+     - checkout
+     - run: echo "A first hello"
+     - run: sleep 25
+ two:
+   docker:
+     - image: circleci/openjdk:8-jdk
+   steps:
+     - checkout
+     - run: echo "A more familiar hi"
+     - run: sleep 15
+workflows:
+ version: 2
+ one_and_two:
+   jobs:
+     - one
+     - two
