@@ -12,13 +12,14 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+          key: gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
   build-backend:
     docker:
       - image: "circleci/openjdk:8-jdk-node-browsers"
     steps:
       - restore_cache:
           keys:
+            - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
             - gradle-repo-v1-{{ .Branch }}-
             - gradle-repo-v1-
       - run:
@@ -30,6 +31,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
+            - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
             - gradle-repo-v1-{{ .Branch }}-
             - gradle-repo-v1-
       - run:
