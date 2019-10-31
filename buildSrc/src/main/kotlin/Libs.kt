@@ -64,6 +64,8 @@ object Libs {
   const val vertx_lang_kotlin_coroutines: String = "io.vertx:vertx-lang-kotlin-coroutines:" +
       Versions.io_vertx
 
+  const val vertx_stack_depchain: String = "io.vertx:vertx-stack-depchain:" + Versions.io_vertx
+
   const val vertx_unit: String = "io.vertx:vertx-unit:" + Versions.io_vertx
 
   const val vertx_web: String = "io.vertx:vertx-web:" + Versions.io_vertx
@@ -89,6 +91,10 @@ object Libs {
   const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
       "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +
       Versions.org_jetbrains_kotlin_jvm_gradle_plugin
+
+  const val io_vertx_vertx_plugin_gradle_plugin: String =
+      "io.vertx.vertx-plugin:io.vertx.vertx-plugin.gradle.plugin:" +
+      Versions.io_vertx_vertx_plugin_gradle_plugin
 
   const val com_moowork_node_gradle_plugin: String =
       "com.moowork.node:com.moowork.node.gradle.plugin:" + Versions.com_moowork_node_gradle_plugin

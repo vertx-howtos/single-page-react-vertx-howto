@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.moowork.gradle.node.yarn.YarnTask
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -14,6 +13,7 @@ plugins {
   id("de.fayard.refreshVersions") version Versions.de_fayard_refreshversions_gradle_plugin
   jacoco
   id("com.github.johnrengelman.shadow") version Versions.com_github_johnrengelman_shadow_gradle_plugin
+  id("io.vertx.vertx-plugin") version Versions.io_vertx_vertx_plugin_gradle_plugin
 }
 
 repositories {
@@ -60,17 +60,13 @@ node {
   nodeModulesDir = File("src/main/frontend")
 }
 
-val mainVerticleName = "io.vertx.howtos.MainVerticle"
-
-// Vert.x watches for file changes in all subdirectories
-// of src/ but only for files with .kt extension
-val watchForChange = "src/**/*.kt"
-
-// Vert.x will call this task on changes
-val doOnChange = "${projectDir}/gradlew classes"
+vertx {
+  mainVerticle = "io.vertx.howtos.MainVerticle"
+  vertxVersion = Versions.io_vertx
+}
 
 tasks {
-  withType<KotlinCompile> {
+  withType(KotlinCompile::class).all {
     kotlinOptions {
       allWarningsAsErrors = true
       jvmTarget = Versions.jdk_version
@@ -119,28 +115,9 @@ tasks {
     violationRules {
       rule {
         limit {
-          minimum = "0.9".toBigDecimal()
+          minimum = "0.5".toBigDecimal()
         }
       }
-    }
-  }
-
-  getByName<JavaExec>("run") {
-    args = listOf(
-      "run", mainVerticleName,
-      "--redeploy=$watchForChange",
-      "--launcher-class=${application.mainClassName}",
-      "--on-redeploy=$doOnChange"
-    )
-  }
-
-  withType<ShadowJar> {
-    archiveClassifier.set("fat")
-    manifest {
-      attributes["Main-Verticle"] = mainVerticleName
-    }
-    mergeServiceFiles {
-      include("META-INF/services/io.vertx.core.spi.VerticleFactory")
     }
   }
 }

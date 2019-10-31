@@ -20,11 +20,13 @@ object Versions {
 
   const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String = "9.0.0"
 
-  const val de_fayard_refreshversions_gradle_plugin: String = "0.8.1"
+  const val de_fayard_refreshversions_gradle_plugin: String = "0.7.0" // available: "0.8.1"
 
   const val org_jetbrains_kotlin_kapt_gradle_plugin: String = "1.3.50"
 
   const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.50"
+
+  const val io_vertx_vertx_plugin_gradle_plugin: String = "0.9.0"
 
   const val com_moowork_node_gradle_plugin: String = "1.3.1"
 
@@ -34,7 +36,7 @@ object Versions {
 
   const val slf4j_api: String = "1.7.28"
 
-  const val ktlint: String = "0.35.0"
+  const val ktlint: String = "0.34.2" // available: "0.35.0"
 
   /**
    * Current version: "5.6.3"
