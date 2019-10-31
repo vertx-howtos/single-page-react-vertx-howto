@@ -17,6 +17,7 @@ jobs:
     docker:
       - image: "circleci/openjdk:8-jdk-node-browsers"
     steps:
+      - checkout
       - restore_cache:
           keys:
             - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
@@ -29,6 +30,7 @@ jobs:
     docker:
       - image: "circleci/openjdk:8-jdk-node-browsers"
     steps:
+      - checkout
       - restore_cache:
           keys:
             - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
@@ -49,4 +51,3 @@ workflows:
       - check-backend:
           requires:
             - fetch-backend
-            - build-backend
