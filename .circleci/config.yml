@@ -1,40 +1,52 @@
 version: 2
-jobs:
-  one:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout
-      - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspaces" > my_workspace/echo-output
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: my_workspace
-          # Must be relative path from root
-          paths:
-            - echo-output      
-  two:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"  
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: my_workspace
 
-      - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
+jobs:
+  fetch-backend:
+    docker:
+      - image: "circleci/openjdk:8-jdk-node-browsers"
+    steps:
+      - checkout
+      - run:
+          name: Fetch Gradle dependencies
+          command: ./gradlew dependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+  build-backend:
+    docker:
+      - image: "circleci/openjdk:8-jdk-node-browsers"
+    steps:
+      - restore_cache:
+          keys:
+            - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+            - gradle-repo-v1-{{ .Branch }}-
+            - gradle-repo-v1-
+      - run:
+          name: Build backend with Gradle
+          command: ./gradlew build
+  check-backend:
+    docker:
+      - image: "circleci/openjdk:8-jdk-node-browsers"
+    steps:
+      - restore_cache:
+          keys:
+            - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+            - gradle-repo-v1-{{ .Branch }}-
+            - gradle-repo-v1-
+      - run:
+          name: Analyze backend code
+          command: ./gradlew check
+
 workflows:
   version: 2
-  one_and_two:
+  backend:
     jobs:
-      - one
-      - two:
+      - fetch-backend
+      - build-backend:
           requires:
-            - one
+            - fetch-backend
+      - check-backend:
+          requires:
+            - fetch-backend
+            - build-backend
