@@ -15,9 +15,13 @@ jobs:
         type: executor
         default: gradle/gradle
     steps:
-      - gradle/run:
+      - checkout
+      - gradle/with_cache:
           name: JaCoCo
-          command: jacocoTestReport
+          steps:
+            - run:
+                name: JaCoCo Test Report
+                command: ./gradlew jacocoTestReport
       - codecov/upload:
           name: Codecov
           file: build/reports/jacoco/report.xml
