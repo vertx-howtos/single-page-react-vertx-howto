@@ -7,7 +7,7 @@ orbs:
 
 jobs:
   codecov-generate-upload:
-    description: Generate coverage and upload on Codecov
+    description: Generate JaCoCo coverage and upload on Codecov
     executor: << parameters.executor >>
     parameters:
       executor:
@@ -22,7 +22,6 @@ jobs:
                 name: JaCoCo Test Report
                 command: ./gradlew jacocoTestReport
       - codecov/upload:
-          name: Codecov
           file: build/reports/jacoco/report.xml
 
 workflows:
