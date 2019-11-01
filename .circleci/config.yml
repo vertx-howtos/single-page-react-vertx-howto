@@ -13,7 +13,7 @@ jobs:
       executor:
         description: The name of custom executor to use
         type: executor
-        default: gradle
+        default: gradle/gradle
     steps:
       - gradle/run:
           name: JaCoCo
