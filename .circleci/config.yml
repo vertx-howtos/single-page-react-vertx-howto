@@ -6,6 +6,10 @@ orbs:
 
 jobs:
   local-info:
+    executor:
+      name: node/default
+      working_directory: ~/src/main/frontend
+      tag: '10.4'
     steps:
       - run: pwd
       - run: ls -al
