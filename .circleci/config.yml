@@ -18,20 +18,13 @@ jobs:
           steps:
             - run: yarn install
       - run: yarn test
-  checkout-build-test:
-    jobs:
-      - gradle/test
-  checkout-run_task:
-    jobs:
-      - gradle/run:
-          command: build -x test
-  checkout-build_node:
-    jobs:
-      - build-node
 
 workflows:
   backend:
     jobs:
-      - checkout-build-test
-      - checkout-run_task
-      - checkout-build_node
+      - gradle/test
+      - gradle/run:
+          command: build -x test
+  frontend:
+    jobs:
+      - build-node
