@@ -13,4 +13,5 @@ workflows:
           test_results_path: build/test-results
           reports_path: build/reports
       - gradle/run:
+          name: ktlint
           command: ktlintCheck
