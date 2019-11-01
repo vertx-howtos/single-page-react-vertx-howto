@@ -8,6 +8,16 @@ import kotlin.String
  */
 object Libs {
   /**
+   * https://arturbosch.github.io/detekt
+   */
+  const val detekt_formatting: String = "io.gitlab.arturbosch.detekt:detekt-formatting:" +
+      Versions.io_gitlab_arturbosch_detekt
+
+  const val io_gitlab_arturbosch_detekt_gradle_plugin: String =
+      "io.gitlab.arturbosch.detekt:io.gitlab.arturbosch.detekt.gradle.plugin:" +
+      Versions.io_gitlab_arturbosch_detekt
+
+  /**
    * https://kotlinlang.org/
    */
   const val kotlin_annotation_processing_gradle: String =

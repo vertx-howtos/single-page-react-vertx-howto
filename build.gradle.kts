@@ -14,6 +14,7 @@ plugins {
   jacoco
   id("com.github.johnrengelman.shadow") version Versions.com_github_johnrengelman_shadow_gradle_plugin
   id("io.vertx.vertx-plugin") version Versions.io_vertx_vertx_plugin_gradle_plugin
+  id("io.gitlab.arturbosch.detekt") version Versions.io_gitlab_arturbosch_detekt
 }
 
 repositories {
@@ -41,6 +42,8 @@ dependencies {
   testImplementation(kotlin("test-junit"))
   testRuntimeOnly(Libs.junit_jupiter_engine)
   testImplementation(Libs.junit_jupiter_api)
+
+  detektPlugins(Libs.detekt_formatting) // Pinterest's ktlint configuration
 }
 
 java {
@@ -63,6 +66,19 @@ node {
 vertx {
   mainVerticle = "io.vertx.howtos.MainVerticle"
   vertxVersion = Versions.io_vertx
+}
+
+detekt {
+  toolVersion = Versions.io_gitlab_arturbosch_detekt
+  parallel = true
+  config = files("config/detekt/detekt.yml")
+  disableDefaultRuleSets = false
+  ignoreFailures = false
+  reports {
+    xml.enabled = true
+    html.enabled = true
+  }
+  idea
 }
 
 tasks {
@@ -104,7 +120,7 @@ tasks {
   jacocoTestReport {
     reports {
       xml.isEnabled = true
-      xml.destination  = file("$buildDir/reports/jacoco/report.xml")
+      xml.destination = file("$buildDir/reports/jacoco/report.xml")
       csv.isEnabled = false
       html.isEnabled = false
     }

@@ -10,6 +10,8 @@ import kotlin.String
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
+  const val io_gitlab_arturbosch_detekt: String = "1.1.1"
+
   const val org_jetbrains_kotlin: String = "1.3.50"
 
   const val org_junit_jupiter: String = "5.5.2"
@@ -34,7 +36,7 @@ object Versions {
 
   const val kotlin_logging: String = "1.7.6"
 
-  const val slf4j_api: String = "1.7.28"
+  const val slf4j_api: String = "1.7.28" // available: "1.7.29"
 
   const val ktlint: String = "0.34.2" // available: "0.35.0"
 
