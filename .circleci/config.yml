@@ -28,7 +28,7 @@ workflows:
   backend:
     jobs:
       - gradle/test:
-          name: JUnit test
+          name: JUnit
           test_results_path: build/test-results
           reports_path: build/reports
       - gradle/run:
@@ -37,4 +37,4 @@ workflows:
       - codecov-generate-upload:
           name: Codecov
           requires:
-            - gradle/test
+            - JUnit
