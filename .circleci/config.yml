@@ -4,11 +4,16 @@ orbs:
   gradle: circleci/gradle@1.0.11
   node: circleci/node@1.1.6
 
+jobs:
+  local-info:
+    steps:
+      - run: pwd
+      - run: ls -al
+
 workflows:
   backend:
     jobs:
-      - run: pwd
-      - run: ls -al
+      - local-info
       - gradle/test:
           test_results_path: build/test-results
           reports_path: build/reports
