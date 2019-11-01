@@ -1,53 +1,32 @@
-version: 2
+version: 2.1
+
+orbs:
+  gradle: circleci/gradle@1.0.0
+  node: circleci/node@1.1
 
 jobs:
-  fetch-backend:
-    docker:
-      - image: "circleci/openjdk:8-jdk-node-browsers"
+  build-node:
+    executor:
+      name: node/default
+      working_directory: ~/src/main/frontend
+      tag: '10.4'
     steps:
+      - pwd
+      - ls -al
       - checkout
-      - run:
-          name: Fetch Gradle dependencies
-          command: ./gradlew dependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
-  build-backend:
-    docker:
-      - image: "circleci/openjdk:8-jdk-node-browsers"
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
-            - gradle-repo-v1-{{ .Branch }}-
-            - gradle-repo-v1-
-      - run:
-          name: Build backend with Gradle
-          command: ./gradlew build
-  check-backend:
-    docker:
-      - image: "circleci/openjdk:8-jdk-node-browsers"
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle.kts" }}
-            - gradle-repo-v1-{{ .Branch }}-
-            - gradle-repo-v1-
-      - run:
-          name: Analyze backend code
-          command: ./gradlew check
+      - node/with-cache:
+          steps:
+            - run: yarn install
+      - run: yarn test
 
 workflows:
-  version: 2
-  backend:
+  checkout-build-test:
     jobs:
-      - fetch-backend
-      - build-backend:
-          requires:
-            - fetch-backend
-      - check-backend:
-          requires:
-            - fetch-backend
+      - gradle/test
+  checkout-run_task:
+    jobs:
+      - gradle/run:
+          command: build -x test
+  checkout-build_node:
+    jobs:
+      - build-node
