@@ -31,3 +31,5 @@ workflows:
       - gradle/run:
           name: ktlint
           command: ktlintCheck
+      - codecov-generate-upload:
+          name: Codecov
