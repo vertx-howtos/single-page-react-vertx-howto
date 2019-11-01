@@ -1,9 +1,23 @@
 version: 2.1
 
 orbs:
-  gradle: circleci/gradle@1.0.0
+  gradle: circleci/gradle@1.0.11
+  node: circleci/node@1.1.6
 
-workflows:
+jobs:
+  build-node:
+    executor:
+      name: node/default
+      working_directory: ~/src/main/frontend
+      tag: '10.4'
+    steps:
+      - pwd
+      - ls -al
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn install
+      - run: yarn test
   checkout-build-test:
     jobs:
       - gradle/test
@@ -11,3 +25,13 @@ workflows:
     jobs:
       - gradle/run:
           command: build -x test
+  checkout-build_node:
+    jobs:
+      - build-node
+
+workflows:
+  backend:
+    jobs:
+      - checkout-build-test
+      - checkout-run_task
+      - checkout-build_node
