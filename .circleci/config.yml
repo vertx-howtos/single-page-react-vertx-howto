@@ -22,7 +22,9 @@ jobs:
 workflows:
   backend:
     jobs:
-      - gradle/test
+      - gradle/test:
+          test_results_path: build/test-results
+          reports_path: build/reports
       - gradle/run:
           command: build -x test
   frontend:
