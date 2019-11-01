@@ -6,9 +6,9 @@ orbs:
 
 jobs:
   build-node:
+    working_directory: ~/src/main/frontend
     executor:
       name: node/default
-      working_directory: ~/src/main/frontend
       tag: '10.4'
     steps:
       - run: pwd
