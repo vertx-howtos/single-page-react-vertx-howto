@@ -4,32 +4,13 @@ orbs:
   gradle: circleci/gradle@1.0.11
   node: circleci/node@1.1.6
 
-jobs:
-  build-node:
-    working_directory: ~/repo/src/main/frontend
-    executor:
-      name: node/default
-      tag: '10.4'
-    steps:
-      - run: pwd
-      - run: ls -al
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: yarn install
-      - run: yarn test
-
 workflows:
   backend:
     jobs:
       - run: pwd
       - run: ls -al
-      - run: ls -al ~/
       - gradle/test:
           test_results_path: build/test-results
           reports_path: build/reports
       - gradle/run:
           command: build -x test
-  frontend:
-    jobs:
-      - build-node
