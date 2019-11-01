@@ -29,6 +29,7 @@ workflows:
   backend:
     jobs:
       - gradle/test:
+          name: JUnit test
           test_results_path: build/test-results
           reports_path: build/reports
       - gradle/run:
@@ -36,3 +37,5 @@ workflows:
           command: ktlintCheck
       - codecov-generate-upload:
           name: Codecov
+          requires:
+            - gradle/test
