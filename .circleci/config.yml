@@ -5,20 +5,12 @@ orbs:
   node: circleci/node@1.1.6
 
 jobs:
-  local-info:
-    executor:
-      name: node/default
-      tag: '10.4'
-    steps:
-      - run: pwd
-      - run: ls -al
 
 workflows:
   backend:
     jobs:
-      - local-info
       - gradle/test:
           test_results_path: build/test-results
           reports_path: build/reports
       - gradle/run:
-          command: build -x test
+          command: ktlintCheck
