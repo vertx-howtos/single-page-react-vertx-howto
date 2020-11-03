@@ -493,7 +493,7 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
             <span style="color: #000080">&lt;id&gt;</span>install-node-and-npm<span style="color: #000080">&lt;/id&gt;</span>
             <span style="color: #000080">&lt;phase&gt;</span>generate-resources<span style="color: #000080">&lt;/phase&gt;</span>
             <span style="color: #000080">&lt;goals&gt;</span>
-              <span style="color: #000080">&lt;goal&gt;</span>install-node-and-npm<span style="color: #000080">&lt;/goal&gt;</span> <b class="conum">(1)</b>
+              <span style="color: #000080">&lt;goal&gt;</span>install-node-and-npm<span style="color: #000080">&lt;/goal&gt;</span> &lt;!--<b class="conum">(1)</b>--&gt;
             <span style="color: #000080">&lt;/goals&gt;</span>
           <span style="color: #000080">&lt;/execution&gt;</span>
           <span style="color: #000080">&lt;execution&gt;</span>
@@ -503,14 +503,14 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
               <span style="color: #000080">&lt;goal&gt;</span>npm<span style="color: #000080">&lt;/goal&gt;</span>
             <span style="color: #000080">&lt;/goals&gt;</span>
             <span style="color: #000080">&lt;configuration&gt;</span>
-              <span style="color: #000080">&lt;arguments&gt;</span>install<span style="color: #000080">&lt;/arguments&gt;</span> <b class="conum">(2)</b>
+              <span style="color: #000080">&lt;arguments&gt;</span>install<span style="color: #000080">&lt;/arguments&gt;</span> &lt;!--<b class="conum">(2)</b>--&gt;
             <span style="color: #000080">&lt;/configuration&gt;</span>
           <span style="color: #000080">&lt;/execution&gt;</span>
           <span style="color: #000080">&lt;execution&gt;</span>
             <span style="color: #000080">&lt;id&gt;</span>npm-run-build<span style="color: #000080">&lt;/id&gt;</span>
             <span style="color: #000080">&lt;phase&gt;</span>generate-resources<span style="color: #000080">&lt;/phase&gt;</span>
             <span style="color: #000080">&lt;goals&gt;</span>
-              <span style="color: #000080">&lt;goal&gt;</span>npm<span style="color: #000080">&lt;/goal&gt;</span> <b class="conum">(3)</b>
+              <span style="color: #000080">&lt;goal&gt;</span>npm<span style="color: #000080">&lt;/goal&gt;</span> &lt;!--<b class="conum">(3)</b>--&gt;
             <span style="color: #000080">&lt;/goals&gt;</span>
             <span style="color: #000080">&lt;configuration&gt;</span>
               <span style="color: #000080">&lt;arguments&gt;</span>run build<span style="color: #000080">&lt;/arguments&gt;</span>
@@ -526,7 +526,7 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
             <span style="color: #000080">&lt;id&gt;</span>copy-to-webroot<span style="color: #000080">&lt;/id&gt;</span>
             <span style="color: #000080">&lt;phase&gt;</span>process-resources<span style="color: #000080">&lt;/phase&gt;</span>
             <span style="color: #000080">&lt;goals&gt;</span>
-              <span style="color: #000080">&lt;goal&gt;</span>copy-resources<span style="color: #000080">&lt;/goal&gt;</span> <b class="conum">(4)</b>
+              <span style="color: #000080">&lt;goal&gt;</span>copy-resources<span style="color: #000080">&lt;/goal&gt;</span> &lt;!--<b class="conum">(4)</b>--&gt;
             <span style="color: #000080">&lt;/goals&gt;</span>
             <span style="color: #000080">&lt;configuration&gt;</span>
               <span style="color: #000080">&lt;outputDirectory&gt;</span>${project.build.outputDirectory}/webroot<span style="color: #000080">&lt;/outputDirectory&gt;</span>
@@ -764,7 +764,7 @@ This is why you must copy static files to <code>src/main/resources/webroot</code
   <div class="row">
     <div class="col">
       <hr>
-      <p><small>Last published: 2020-11-02 19:47:55 +0000.</small></p>
+      <p><small>Last published: 2020-11-03 19:48:05 +0000.</small></p>
     </div>
   </div>
 </div>
