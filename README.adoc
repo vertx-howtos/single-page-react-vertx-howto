@@ -39,7 +39,7 @@ The code of this project contains Maven and Gradle build files that are function
 
 === Using Maven
 
-Add the `vertx-web` dependency in you Maven POM file:
+Add the `vertx-web` dependency in your Maven POM file:
 
 [source,xml]
 .Maven `pom.xml`
