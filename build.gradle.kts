@@ -14,7 +14,7 @@ repositories {
 
 // tag::dependencies[]
 dependencies {
-  val vertxVersion = "3.7.0"
+  val vertxVersion = "4.0.0"
   implementation("io.vertx:vertx-web:${vertxVersion}")
 }
 // end::dependencies[]
