@@ -3,7 +3,7 @@
 :page-github: vertx-howtos/single-page-react-vertx-howto
 
 ifdef::env-github[]
-image:https://travis-ci.org/vertx-howtos/single-page-react-vertx-howto.svg?branch=master["Build Status", link="https://travis-ci.org/vertx-howtos/single-page-react-vertx-howto"]
+image:https://github.com/vertx-howtos/single-page-react-vertx-howto/workflows/Publish%20the%20how-to/badge.svg["Build Status", link="https://github.com/vertx-howtos/single-page-react-vertx-howto/actions?query=workflow%3A%22Publish+the+how-to%22"]
 endif::env-github[]
 
 This document will show you how to develop a Single Page Application (SPA) with React and Vert.x.
