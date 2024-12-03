@@ -21,7 +21,7 @@ dependencies {
 
 // tag::application-main[]
 application {
-  mainClassName = "io.vertx.howtos.react.BackendVerticle"
+  mainClass = "io.vertx.howtos.react.BackendVerticle"
 }
 // end::application-main[]
 
@@ -48,7 +48,3 @@ val processResources by tasks.getting(ProcessResources::class) {
   dependsOn(copyToWebRoot)
 }
 // end::gradle-frontend-build[]
-
-tasks.wrapper {
-  gradleVersion = "5.2"
-}
