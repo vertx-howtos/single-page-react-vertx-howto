@@ -1,15 +1,16 @@
 package io.vertx.howtos.react;
 
-import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Future;
+import io.vertx.core.VerticleBase;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 
-public class BackendVerticle extends AbstractVerticle {
+public class BackendVerticle extends VerticleBase {
 
   @Override
-  public void start() throws Exception {
+  public Future<?> start() throws Exception {
     // tag::backend[]
     Router router = Router.router(vertx);
     Route messageRoute = router.get("/api/message"); // <1>
@@ -19,7 +20,7 @@ public class BackendVerticle extends AbstractVerticle {
 
     router.get().handler(StaticHandler.create()); // <3>
 
-    vertx.createHttpServer()
+    return vertx.createHttpServer()
       .requestHandler(router)
       .listen(8080);
     // end::backend[]
@@ -28,7 +29,8 @@ public class BackendVerticle extends AbstractVerticle {
   // tag::main[]
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx(); // <1>
-    vertx.deployVerticle(new BackendVerticle()); // <2>
+    vertx.deployVerticle(new BackendVerticle()).await(); // <2>
+    System.out.println("Verticle started!");
   }
   // end::main[]
 }

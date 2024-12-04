@@ -1,10 +1,10 @@
 // tag::gradle-npm-plugin[]
-import com.moowork.gradle.node.npm.NpmTask
+import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
   java
   application
-  id("com.moowork.node") version "1.3.1"
+  id("com.github.node-gradle.node") version "7.0.2"
 }
 // end::gradle-npm-plugin[]
 
@@ -14,7 +14,7 @@ repositories {
 
 // tag::dependencies[]
 dependencies {
-  val vertxVersion = "4.0.0"
+  val vertxVersion = "5.0.0.CR2"
   implementation("io.vertx:vertx-web:${vertxVersion}")
 }
 // end::dependencies[]
@@ -25,22 +25,28 @@ application {
 }
 // end::application-main[]
 
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+  }
+}
+
 // tag::gradle-frontend-build[]
 node {
-  version = "10.15.3"
-  npmVersion = "6.4.1"
+  version = "22.12.0"
+  npmVersion = "10.9.0"
   download = true
-  nodeModulesDir = File("src/main/frontend")
+  nodeProjectDir = File("src/main/frontend")
 }
 
 val buildFrontend by tasks.creating(NpmTask::class) {
-  setArgs(listOf("run", "build"))
-  dependsOn("npmInstall")
+  args = listOf("run", "build")
+  dependsOn("npm_install")
 }
 
 val copyToWebRoot by tasks.creating(Copy::class) {
   from("src/main/frontend/build")
-  destinationDir = File("${buildDir}/classes/java/main/webroot")
+  destinationDir = File("build/classes/java/main/webroot")
   dependsOn(buildFrontend)
 }
 

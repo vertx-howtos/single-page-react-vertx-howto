@@ -27,7 +27,7 @@ image::workflow-api.svg[API request]
 == What you need
 
 * A text editor or IDE
-* Java 8 or higher
+* Java 11 or higher
 * Maven or Gradle
 * Node
 * `npm`
@@ -118,7 +118,7 @@ http :8080/api/message
 
 You should see:
 
-[source,javascript]
+[source]
 ----
 HTTP/1.1 200 OK
 content-length: 24
